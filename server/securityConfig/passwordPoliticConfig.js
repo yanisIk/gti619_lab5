@@ -1,0 +1,1 @@
+//Create a new collection representing the password politics
