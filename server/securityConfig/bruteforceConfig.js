@@ -10,12 +10,12 @@ ThrottleAccounts.create('global', 20, 1000, 'Under Heavy Load - too many account
 Meteor.methods({
 	"setMaxLoginAttempts": function(numberOfAttempts){
 		//check if numberOfAttemps is a positive integer
-		//check if role is admin
+		//check if loggedIn user is admin
 		//make modifications
 	},
 	"setAuthDelayAfterMaxAttempts": function(delayInSeconds){
 		//check if numberOfAttemps is a positive integer
-		//check if role is admin
+		//check if loggedIn user is admin
 		//make modifications
 	}
 });
