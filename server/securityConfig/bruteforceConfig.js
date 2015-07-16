@@ -8,14 +8,35 @@ ThrottleAccounts.create('global', 20, 1000, 'Under Heavy Load - too many account
 
 
 Meteor.methods({
-	"setMaxLoginAttempts": function(numberOfAttempts){
+	"setMaxLoginAttemptsPerIp": function(numberOfAttempts){
 		//check if numberOfAttemps is a positive integer
+		check(numberOfAttemps, Match.Integer);
+		if(!numberOfAttempts > 0){
+			throw new Meteor.Error(503, "numberOfAttemps must be a positive integer")
+		}
 		//check if loggedIn user is admin
+		if(!this.userId || !Roles.userIsInRole(this.userId, ["admin"])){
+      		throw new Meteor.Error(403, "unauthorized");
+    	}
 		//make modifications
+		setMaxLoginAttemptsPerIp(numberOfAttempts);
+		var delay = getAuthDelayAfterMaxAttempts();
+		ThrottleAccounts.login('ip', numberOfAttempts, `delay, 'too many login attempts');
+
 	},
 	"setAuthDelayAfterMaxAttempts": function(delayInSeconds){
 		//check if numberOfAttemps is a positive integer
+		check(delayInSeconds, Match.Integer);
+		if(!numberOfAttempts > 0){
+			throw new Meteor.Error(503, "delayInSeconds must be a positive integer")
+		}
 		//check if loggedIn user is admin
+		if(!this.userId || !Roles.userIsInRole(this.userId, ["admin"])){
+      		throw new Meteor.Error(403, "unauthorized");
+    	}
 		//make modifications
+		setAuthDelayAfterMaxAttempts(delayInSeconds*1000);
+		var maxLoginAttempts = getMaxLoginAttemptsPerIp();
+		ThrottleAccounts.login('ip', ,maxLoginAttempts, delayInSeconds*1000, 'Under Heavy Load - too many login attempts');
 	}
 });
