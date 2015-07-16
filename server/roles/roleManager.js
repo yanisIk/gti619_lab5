@@ -1,6 +1,5 @@
 
 //Create the users at meteor startup
-//TODO Wrap in Meteor.startup
  Meteor.startup(function(){
     if(Meteor.users.find("username": "administrateur").count == 1){
       return;

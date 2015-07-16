@@ -21,7 +21,7 @@ Meteor.methods({
 		//make modifications
 		setMaxLoginAttemptsPerIp(numberOfAttempts);
 		var delay = getAuthDelayAfterMaxAttempts();
-		ThrottleAccounts.login('ip', numberOfAttempts, `delay, 'too many login attempts');
+		ThrottleAccounts.login('ip', numberOfAttempts, delay, 'too many login attempts');
 
 	},
 	"setAuthDelayAfterMaxAttempts": function(delayInSeconds){

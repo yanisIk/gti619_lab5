@@ -6,7 +6,7 @@ getMaxLoginAttemptsPerIp = function(){
 
 setMaxLoginAttemptsPerIp = function(maxLoginAttempts){
 	var id = BruteforcePolitics.findOne()._id;
-	BruteforcePolitics.update("_id": id, {maxLoginAttemptsPerIp: maxLoginAttempts});
+	BruteforcePolitics.update("_id": id, {$set: {maxLoginAttemptsPerIp: maxLoginAttempts}});
 }
 
 getAuthDelayAfterMaxAttempts = function(){
@@ -15,5 +15,5 @@ getAuthDelayAfterMaxAttempts = function(){
 
 setAuthDelayAfterMaxAttempts = function(authDelay){
 	var id = BruteforcePolitics.findOne()._id;
-	BruteforcePolitics.update("_id": id, {authDelayAfterMaxAttempts: authDelay});
+	BruteforcePolitics.update("_id": id, {$set: {authDelayAfterMaxAttempts: authDelay}});
 }
