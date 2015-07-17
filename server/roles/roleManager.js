@@ -1,7 +1,7 @@
 
 //Create the users at meteor startup
  Meteor.startup(function(){
-    if(Meteor.users.find("username": "administrateur").count == 1){
+    if(Meteor.users.find({"username": "administrateur"}).count == 1){
       return;
     }
 
@@ -39,7 +39,7 @@ Meteor.methods({
       throw new Meteor.Error(503, "user not found");
     }
 		//check if roles exists
-    if(!roles.length > 0 || Meteor.roles.find("name":{$in:roles}).count != roles.length){
+    if(!roles.length > 0 || Meteor.roles.find({"name":{$in:roles}}).count != roles.length){
       throw new Meteor.Error(503, "One or more roles don't exist")
     }
 		//make modifications

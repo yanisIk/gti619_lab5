@@ -15,3 +15,9 @@ bootstrap
 mizzao:user-status
 infinitedg:winston
 meteorhacks:sikka
+zuuk:stale-session
+zimme:iron-router-auth
+horka:auth-forms
+eluck:accounts-lockout
+miktam:api-password
+steeve:single-page-login

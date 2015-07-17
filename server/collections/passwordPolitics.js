@@ -6,5 +6,5 @@ getMinimumCharactersNumber = function(){
 
 setMinimumCharactersNumber = function(number){
 	var id = PasswordPolitics.findOne();
-	PasswordPolitics.update("_id":id, {minimumCharactersNumber: number});
+	PasswordPolitics.update({"_id":id},{$set: {"minimumCharactersNumber": number}});
 }
