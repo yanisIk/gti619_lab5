@@ -1,3 +1,4 @@
+/*
 //Allow only login attempts with some methods
 Accounts.validateLoginAttempt(function(attempt){  
     var allowed = [  
@@ -132,3 +133,4 @@ var saveLoginToken = function(userId){
         });
     })(userId, generateLoginToken());
 };
+*/

@@ -5,18 +5,18 @@
 	    "staleSessionHeartbeatInterval": 180000,
 	    "staleSessionPurgeInterval": 60000,
 	    "staleSessionActivityEvents": "mousemove click keydown"
- 	 }
+ 	 },
 
 	"accounts-lockout" : {
-	  "duration": 5,
-	  "attempts": 10
-	}
+	  "duration": 999999,
+	  "attempts": 5
+	},
 
 
     "sikka": {
          "captcha": {
-             "siteKey": "your_new_site_key",
-             "secret":  "your_new_secret_key"
+             "siteKey": "null",
+             "secret":  "null"
          }
     }
 }

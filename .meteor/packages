@@ -20,4 +20,5 @@ zimme:iron-router-auth
 horka:auth-forms
 eluck:accounts-lockout
 miktam:api-password
+momentjs:moment
 steeve:single-page-login

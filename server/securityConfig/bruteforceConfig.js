@@ -41,5 +41,24 @@ Meteor.methods({
 		setAuthDelayAfterMaxAttempts(delayInSeconds*1000);
 		var maxLoginAttempts = getMaxLoginAttemptsPerIp();
 		ThrottleAccounts.login('ip',maxLoginAttempts, delayInSeconds*1000, 'Under Heavy Load - too many login attempts');
+	},
+	"unlockUserAndResetPasswordByEmail": function(username){
+		check(username, String);
+		check(password, String);
+
+		if(!this.userId || !Roles.userIsInRole(this.userId, ["admin"])){
+      		throw new Meteor.Error(403, "unauthorized");
+    	}
+    	var user = Meteor.users.findOne({"username": username});
+    	if(!user){
+    		throw new Meteor.Error(500, "user "+username+" doesn't exist");
+    	}
+    	if(!user.services && !user.services['accounts-lockout'] &&
+    		user.services['accounts-lockout'].unlockTime < Date.now()){
+    		throw new Meteor.Error(500, "user "+username+" isn't locked");
+    	}
+
+    	Accounts.sendResetPasswordEmail(user.userId);
+    	AccountsLockout.unlockAccount(user.userId);
 	}
 });
