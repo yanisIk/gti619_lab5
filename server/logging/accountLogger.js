@@ -1,4 +1,3 @@
-//TODO Log signup
 Accounts.onCreateUser(function(options, user){
 	var log = {
 		level: "INFO",
@@ -14,7 +13,7 @@ Accounts.onCreateUser(function(options, user){
 })
 
 
-//TODO Log successful logins
+
 UserStatus.events.on("connectionLogin", function(fields) { 
 
 	var log = {
@@ -31,7 +30,7 @@ UserStatus.events.on("connectionLogin", function(fields) {
 });
 
 
-//TODO Log successful logouts
+
 UserStatus.events.on("connectionLogout", function(fields) { 
 
 	var log = {
@@ -47,7 +46,7 @@ UserStatus.events.on("connectionLogout", function(fields) {
 	console.log(log.message);
 });
 
-//TODO Log failed logins
+
 Accounts.onLoginFailure(function(attempt){
 	var username = null;
 	if(attempt.user){
@@ -67,5 +66,20 @@ Accounts.onLoginFailure(function(attempt){
 })
 
 
-//TODO Log password changes
-
+Meteor.methods({
+	"logPasswordChange" : function(userId){
+		this.unblock();
+		var username = Meteor.users.findOne(userId).username;
+		var log = {
+			level: "WARN",
+			type: "ACCOUNT",
+			action: "PASSWORD_CHANGE",
+			username: username,
+			ipAddress: this.connection.clientAddress,
+			time: Date.now(),
+			message: "User "+this.username+" with IP "+this.ipAddress+" changed his password at "+this.time
+		}
+		Logs.insert(log);	
+		console.log(log.message);
+	}
+});

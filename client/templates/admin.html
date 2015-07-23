@@ -1,5 +1,13 @@
 <template name="admin">
   
     <p>ADMIN PANEL</p>
+    <br><br><br>
+    
+    {{#autoForm id="demo" schema=schema}}
+  		{{> afQuickFields}}
+  		<div>
+    		<button type="submit">Submit</button>
+  		</div>
+	{{/autoForm}}
 
 </template>

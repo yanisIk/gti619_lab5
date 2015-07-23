@@ -3,6 +3,8 @@ accounts-password@1.1.1
 accounts-ui@1.1.5
 accounts-ui-unstyled@1.1.7
 alanning:roles@1.2.13
+aldeed:autoform@5.3.2
+aldeed:simple-schema@1.1.0
 autoupdate@1.2.1
 base64@1.0.3
 binary-heap@1.0.3
@@ -39,6 +41,7 @@ iron:router@1.0.9
 iron:url@1.0.9
 jquery@1.11.3_2
 json@1.0.3
+juliancwirko:s-alert@2.4.1
 launch-screen@1.0.2
 less@1.0.14
 livedata@1.0.13
