@@ -1,8 +1,4 @@
 Accounts.onLoginFailure(function(attempt){		
-	sAlert.info(attempt.error.reason);	
-});
-
-Accounts.onResetPasswordLink(function(token, done){
-	//Meteor.call("logPasswordChange", userId);
-	//TODO : Get the userId ....
+	//To tell that email verification has been sent
+	//sAlert.info(attempt.error.reason);	
 });

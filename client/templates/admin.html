@@ -1,13 +1,20 @@
-<template name="admin">
+<template name="adminlab">
   
     <p>ADMIN PANEL</p>
     <br><br><br>
-    
+    LOGS :
+	<ul class="list-group">
+		{{#each logs}}
+	   		<li class="list-group-item">{{message}}</li>
+		{{/each}}
+	</ul>
+    <!--
     {{#autoForm id="demo" schema=schema}}
   		{{> afQuickFields}}
   		<div>
     		<button type="submit">Submit</button>
   		</div>
 	{{/autoForm}}
+	-->
 
 </template>

@@ -1,7 +1,7 @@
 {
 
 	"public": {
-	    "staleSessionInactivityTimeout": 1800000,
+	    "staleSessionInactivityTimeout": 180000,
 	    "staleSessionHeartbeatInterval": 180000,
 	    "staleSessionPurgeInterval": 60000,
 	    "staleSessionActivityEvents": "mousemove click keydown"
@@ -18,5 +18,21 @@
              "siteKey": "null",
              "secret":  "null"
          }
+    },
+
+    "passwordPolitics": {
+         "minChars": 6,
+         "maxChars": 15,
+         "useSpecialCharacters": false,
+         "useNumbers": true,
+         "useCapitalLetter": true,
+         "passwordLifetime": 60,
+         "useTwoFactorsAuth": false
+    },
+
+    "bruteforcePolitics": {
+    	"maxLoginAttemptsPerIp": 3,
+		"authDelayAfterMaxAttempts": 20000
     }
+
 }

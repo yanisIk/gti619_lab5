@@ -4,8 +4,8 @@ Accounts.onCreateUser(function(options, user){
 		type: "ACCOUNT",
 		action: "SIGNUP",
 		username: user.username,
-		time: Date.now(),
-		message: "User "+user.username+" signed up at "+this.time
+		time: new Date(),
+		message: "User "+user.username+" signed up at "+new Date()
 	}
 	Logs.insert(log);
 	console.log(log.message);	
@@ -15,15 +15,15 @@ Accounts.onCreateUser(function(options, user){
 
 
 UserStatus.events.on("connectionLogin", function(fields) { 
-
+	var username = Meteor.users.findOne(fields.userId).username;
 	var log = {
 		level: "INFO",
 		type: "ACCOUNT",
 		action: "LOGIN",
-		userId: fields.userId,
+		username: username,
 		ipAddress: fields.ipAddr,
 		time: fields.loginTime,
-		message: "User "+fields.userId+" with IP "+fields.ipAddr+" logged in at "+fields.loginTime
+		message: "User "+username+" with IP "+fields.ipAddr+" logged in at "+fields.loginTime
 	}
 	Logs.insert(log);	
 	console.log(log.message);
@@ -32,15 +32,15 @@ UserStatus.events.on("connectionLogin", function(fields) {
 
 
 UserStatus.events.on("connectionLogout", function(fields) { 
-
+	var username = Meteor.users.findOne(fields.userId).username;
 	var log = {
 		level: "INFO",
 		type: "ACCOUNT",
 		action: "LOGOUT",
-		userId: fields.userId,
+		username: username,
 		ipAddress: fields.ipAddr,
 		time: fields.logoutTime,
-		message: "User "+fields.userId+" with IP "+fields.ipAddr+" logged out at "+fields.logoutTime
+		message: "User "+username+" with IP "+fields.ipAddr+" logged out at "+fields.logoutTime
 	}
 	Logs.insert(log);	
 	console.log(log.message);
@@ -50,7 +50,7 @@ UserStatus.events.on("connectionLogout", function(fields) {
 Accounts.onLoginFailure(function(attempt){
 	var username = null;
 	if(attempt.user){
-		username = user.username;
+		username = attempt.user.username;
 	}
 	var log = {
 		level: "WARN",
@@ -58,8 +58,8 @@ Accounts.onLoginFailure(function(attempt){
 		action: "FAILED_LOGIN",
 		username: username,
 		ipAddress: attempt.connection.clientAddress,
-		time: Date.now(),
-		message: "User "+this.username+" with IP "+this.ipAddress+" failed to login at "+this.time+". Reason : "+attempt.error.reason
+		time: new Date(),
+		message: "User "+username+" with IP "+attempt.connection.clientAddress+" failed to login at "+new Date()+". Reason : "+attempt.error.reason
 	}
 	Logs.insert(log);	
 	console.log(log.message);
@@ -76,8 +76,8 @@ Meteor.methods({
 			action: "PASSWORD_CHANGE",
 			username: username,
 			ipAddress: this.connection.clientAddress,
-			time: Date.now(),
-			message: "User "+this.username+" with IP "+this.ipAddress+" changed his password at "+this.time
+			time: new Date(),
+			message: "User "+username+" with IP "+this.connection.clientAddress+" changed his password at "+new Date()
 		}
 		Logs.insert(log);	
 		console.log(log.message);

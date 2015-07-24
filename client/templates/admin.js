@@ -1,7 +1,13 @@
-Template.admin.helpers({
-
+Template.adminlab.helpers({
+	logs: function(){
+		return Logs.find({},{sort: {time: -1}}, {limit: 10});
+	}
 });
 
-Template.admin.events({
+Template.adminlab.onRendered(function(){
+	this.subscribe("logs");
+});
+
+Template.adminlab.events({
 
 });
